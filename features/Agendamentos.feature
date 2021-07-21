@@ -6,6 +6,16 @@ Feature: Agendamento de horários do dentista
 
 #################### GUI SCENARIOS ####################
 
+    Scenario: Criar um agendamento com informações incompletas
+        Given Eu estou na página de agendamentos
+        And Eu não vejo o agendamento de nome "Maria" na lista
+        When Eu seleciono a opção para adicionar um agendamento
+        And Eu tento cadastrar o agendamento "12345678910" com nome "Maria"
+        And Com dentista responsável sendo "Felipe"
+        And Sem hora para o agendamento
+        Then Eu posso ver uma mensagem de agendamento inválido
+        And Eu não vejo o agendamento "12345678910" na lista de agendamentos
+
     Scenario: Criar um novo agendamento
         Given Eu estou na página de agendamentos
         And Eu não vejo o agendamento de nome "Maria" na lista
