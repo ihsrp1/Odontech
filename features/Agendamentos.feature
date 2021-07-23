@@ -36,3 +36,4 @@ Feature: Agendamento de horários do dentista
         And Com dentista responsável sendo "Felipe"
         Then Eu posso ver uma mensagem de agendamento inválido
         And Eu não vejo o agendamento "12345678910" na lista de agendamentos
+        And não é agendado
