@@ -44,3 +44,10 @@ Feature: Agendamento de horários do dentista
         And Hoje é dia 15 o mês 5 às 09:00 horas
         When Eu solicito ao sistema o tempo restante até o agendamento '12345678910'
         Then O sistema retorna o tempo restante de 25 horas e 30 minutos
+
+    Scenario: Impedir a criação de um agendamento inválido
+        Given Eu desejo criar o agendamento no nome de 'Karla' no sistema para o dia 16 do mês 5 às 10:00 horas
+        And Já existe um agendamento no nome de 'Maria' para esse mesmo horário
+        When Eu solicito ao sistema a criação do agendamento no nome de 'Karla'
+        Then O sistema retorna que o agendamento é inválido por conflito de horários
+        And O agendamento no nome de 'Karla' não é armazenado
