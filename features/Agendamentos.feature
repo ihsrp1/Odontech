@@ -36,3 +36,11 @@ Feature: Agendamento de horários do dentista
         And Com dentista responsável sendo "Felipe"
         Then Eu posso ver uma mensagem de agendamento inválido
         And Eu não vejo o agendamento "12345678910" na lista de agendamentos
+
+################## SERVICE SCENARIOS ##################
+
+    Scenario: Retornar o tempo restante até o agendamento
+        Given O agendamento '12345678910' é armazenado no sistema para o dia 16 do mês 5 às 10:00 horas
+        And Hoje é dia 15 o mês 5 às 09:00 horas
+        When Eu solicito ao sistema o tempo restante até o agendamento '12345678910'
+        Then O sistema retorna o tempo restante de 25 horas e 30 minutos
