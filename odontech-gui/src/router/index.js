@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import store from '../store'
 
 import Agendamento from '../views/Agendamento'
+import Atendimento from '../views/Atendimento'
 import Login from '../views/Login'
 
 Vue.use(VueRouter)
@@ -14,6 +15,14 @@ const routes = [
     component: Agendamento,
     meta: {
       title: 'Agendamentos'
+    }
+  },
+  {
+    path: '/atendimentos',
+    name: 'Atendimento',
+    component: Atendimento,
+    meta: {
+      title: 'Atendimentos'
     }
   },
   {
