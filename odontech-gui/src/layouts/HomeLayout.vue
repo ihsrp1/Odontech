@@ -47,6 +47,11 @@ export default {
           path: '/agendamentos'
         },
         {
+          text: 'Atendimentos',
+          icon: 'mdi-view-list',
+          path: '/atendimentos'
+        },
+        {
           text: 'Sair',
           icon: 'mdi-logout',
           path: '/login'
