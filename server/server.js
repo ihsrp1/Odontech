@@ -1,3 +1,5 @@
+const { initAgendamento } = require('./agendamentoService');
+
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -13,6 +15,7 @@ app.use(function(req, res, next) {
 });
 
 (function main () {
+    initAgendamento (app)
 })();
 
 
