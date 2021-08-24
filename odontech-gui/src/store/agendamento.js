@@ -7,7 +7,6 @@ export const agendamento = {
   },
   getters: {
     getAgendamentos: state => {
-      console.log('aaa')
       return state.events
     }
   },
@@ -18,10 +17,8 @@ export const agendamento = {
       commit('setList', result.data)
     },
     async addAgendamento({ commit }, event) {
-      console.log('addAgendamento')
       let result = []
       result = await axios.post('http://localhost:3000/addAgendamento', event)
-      console.log(result)
       commit('setList', result.data)
     }
   },
