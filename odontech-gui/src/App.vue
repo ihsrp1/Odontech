@@ -1,10 +1,20 @@
 <template lang="pug">
   v-app.default_background
+    HomeLayout(v-if='!isLogin')
+    template(v-else)
+      .image_login
+      LoginLayout
 </template>
 
 <script>
+import LoginLayout from '../src/layouts/LoginLayout'
+import HomeLayout from '../src/layouts/HomeLayout'
 
 export default {
+  components: {
+    LoginLayout,
+    HomeLayout
+  },
   watch: {
     $route: {
       immediate: true,
