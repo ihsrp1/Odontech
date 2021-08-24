@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "test": "cucumber-js"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^7.2.1"
+  },
+  "dependencies": {
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
+    "puppeteer": "^9.1.0"
+  }
+}
