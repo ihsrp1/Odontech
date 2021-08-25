@@ -31,8 +31,7 @@ Scenario: Filtro de exame por Exame.
 
 Scenario: Filtro exame por nome e Exane invalido.
 	Given Os exames "01, Pedro Manoel, 16-07-2020, Marcos,IRN, 3.0" esta armazenadas no sistema.
-	When Eu solicita o filtro nome por nome "Pedro Manoel"
+	When Eu solicita o filtro por nome "Pedro Manoel"
 	And Eu solicita o filtro Exame por "TGO"
-    And Eu requisito o sistema para "filtrar"
-    Then Recebo uma mensagem indicando a falha no consulta devido a problemas com os parametros passados
-    And Não consigo visualizar os dados do exame requisitado na base de dados
+        And Eu requisito o sistema para "filtrar"
+        Then Recebo uma mensagem indicando a falha no consulta devido a problemas com os parametros passados
