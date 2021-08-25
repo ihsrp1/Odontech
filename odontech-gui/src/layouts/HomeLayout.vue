@@ -52,6 +52,11 @@ export default {
           path: '/atendimentos'
         },
         {
+          text: 'Exame',
+          icon: 'mdi-view-list',
+          path: '/exame'
+        },
+        {
           text: 'Sair',
           icon: 'mdi-logout',
           path: '/login'
