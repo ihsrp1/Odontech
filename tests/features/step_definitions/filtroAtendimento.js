@@ -76,13 +76,31 @@ Given('Os atendimentos {string} e {string} e {string} são exibidos na tela.', a
         }
     }
 
-    console.log([patient_ok, type_ok, date_ok, time_ok, dentist_ok])
-
     expect(patient_ok).to.equal(3)
     expect(type_ok).to.equal(3)
     expect(date_ok).to.equal(3)
     expect(time_ok).to.equal(3)
     expect(dentist_ok).to.equal(3)
+});
+
+When('Eu escolho filtrar pela data inicial {string}', async function (string) {
+    // Write code here that turns the phrase above into concrete actions
+    const initialDateInput_el = await page.$('.atendimento-input-date-initial div div div input')
+    await page.type('.atendimento-input-date-initial div div div input', string)
+
+    const typed = await page.evaluate(x => x.value, initialDateInput_el)
+
+    expect(typed).to.equal(string)
+});
+
+When('Eu escolho filtrar pela data final {string}', async function (string) {
+    // Write code here that turns the phrase above into concrete actions
+    const finalDateInput_el = await page.$('.atendimento-input-date-final div div div input')
+    await page.type('.atendimento-input-date-final div div div input', string)
+
+    const typed = await page.evaluate(x => x.value, finalDateInput_el)
+
+    expect(typed).to.equal(string)
 });
 
 When('Eu digito o CPF {string} no campo de busca por CPF', function (string) {
