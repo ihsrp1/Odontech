@@ -1,10 +1,12 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
 const puppeteer = require('puppeteer');
+const axios = require('axios')
 let chai = require('chai').use(require('chai-as-promised'));
 let expect = chai.expect;
 
 var vue_base_url = "http://localhost:8080/";
 let [browser, page] = [null, null]
+let eventGlobal = null
 
 // Scenario: Criar um agendamento com informações incompletas
 
@@ -27,6 +29,40 @@ Given('Eu não vejo o agendamento de nome {string} na lista', async function (st
         }
     }
     expect(validation).to.equal(true)
+});
+
+Given('O agendamento {string} é armazenado no sistema para o dia {string} do mês {string} às {string} horas no nome de {string} com destista {string}', async function (cpf, day, month, time, name, dentist) {
+    let validation = false
+    const colorsDentists = {
+        'Alberto': 'blue', 
+        'Eva': 'indigo',
+        'Eduarda': 'deep-purple',
+        'Felipe': 'cyan',
+        'Galindo Vinícius': 'green',
+        'Igor Henrique': 'orange',
+        'Karlos Gubianni': 'grey darken-1'
+    }
+    let endTime = parseInt(time.split(':')[0]) + 1 
+    const event = {
+        color: colorsDentists[dentist],
+        cpf,
+        dentist: Object.values(colorsDentists).indexOf(colorsDentists[dentist]),
+        end: new Date(`2021-${month}-${day} ${endTime}`),
+        name,
+        start: new Date(`2021-${month}-${day} ${time}`),
+        timed: true
+    }
+    try {
+        axios.post('http://localhost:3000/addAgendamento', event)
+        validation = true
+        expect(validation).to.equal(true)
+    } catch (error) {
+        expect(validation).to.equal(true)
+    }
+});
+
+Given('Já existe um agendamento para o dia {string} do mês {string} às {string} horas no nome de {string} com dentista {string} no sistema', async function (day, month, time, name, dentist) {
+    return
 });
 
 When('Eu seleciono a opção para adicionar um agendamento', async function () {
@@ -121,6 +157,44 @@ When('Com horário para o dia {string} do mês {string} às {string} horas', asy
     expect(timeSelected).to.equal(time)
 });
 
+When('Eu solicito ao sistema o tempo restante até o agendamento {string}', async function (cpf) {
+    let validation = false
+    let result = ''
+    try {
+        result = await axios.get('http://localhost:3000/howMuchTime', {params: {
+            cpf
+        }})
+        if (typeof result.data === typeof '') validation = true
+        expect(validation).to.equal(true)
+    } catch (error) {
+        expect(validation).to.equal(true)
+    }
+});
+
+Given('Eu solicito ao sistema a criação do agendamento {string} para o dia {string} do mês {string} às {string} horas no nome de {string} com dentista {string} no sistema', async function (cpf, day, month, time, name, dentist) {
+    const colorsDentists = {
+        'Alberto': 'blue', 
+        'Eva': 'indigo',
+        'Eduarda': 'deep-purple',
+        'Felipe': 'cyan',
+        'Galindo Vinícius': 'green',
+        'Igor Henrique': 'orange',
+        'Karlos Gubianni': 'grey darken-1'
+    }
+    let endTime = parseInt(time.split(':')[0]) + 1 
+    const event = {
+        color: colorsDentists[dentist],
+        cpf,
+        dentist: Object.values(colorsDentists).indexOf(colorsDentists[dentist]),
+        end: new Date(`2021-${month}-${day} ${endTime}`),
+        name,
+        time: time,
+        date: `2021-${month}-${day}`,
+        timed: true
+    }
+    eventGlobal = event 
+});
+
 Then('Eu posso ver uma mensagem de confirmação', async function () {
     await page.click('#confirm_creation')
 
@@ -204,4 +278,22 @@ Then('Eu não vejo o nome {string} na lista de agendamentos', async function (no
         }
     }
     expect(validation).to.equal(true)
+});
+
+Then('O sistema retorna o tempo restante para o atendimento', async function () {
+    return
+});
+
+Then('O sistema retorna que o agendamento é inválido por conflito de horários', async function () {
+    result = await axios.get('http://localhost:3000/checkIfAgendamentoIsAvaiable', {params: {
+        dentist: eventGlobal.dentist,
+        date: eventGlobal.date,
+        time: eventGlobal.time
+    }})
+    console.log(result.data)
+    expect(result.data).to.equal(false)
+});
+
+Then('O agendamento no nome de {string} não é armazenado', async function (name) {
+    return
 });

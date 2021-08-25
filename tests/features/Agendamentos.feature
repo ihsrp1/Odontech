@@ -40,14 +40,12 @@ Feature: Agendamento de horários do dentista
 ################## SERVICE SCENARIOS ##################
 
     Scenario: Retornar o tempo restante até o agendamento
-        Given O agendamento '12345678910' é armazenado no sistema para o dia 16 do mês 5 às 10:00 horas
-        And Hoje é dia 15 o mês 5 às 09:00 horas
-        When Eu solicito ao sistema o tempo restante até o agendamento '12345678910'
-        Then O sistema retorna o tempo restante de 25 horas e 30 minutos
+        Given O agendamento "45214756586" é armazenado no sistema para o dia "28" do mês "8" às "10:00" horas no nome de "Carlos" com destista "Felipe"
+        When Eu solicito ao sistema o tempo restante até o agendamento "45214756586"
+        Then O sistema retorna o tempo restante para o atendimento
 
-    Scenario: Impedir a criação de um agendamento inválido
-        Given Eu desejo criar o agendamento no nome de 'Karla' no sistema para o dia 16 do mês 5 às 10:00 horas
-        And Já existe um agendamento no nome de 'Maria' para esse mesmo horário
-        When Eu solicito ao sistema a criação do agendamento no nome de 'Karla'
+    Scenario: Impedir a criação de um agendamento inválido 
+        Given Já existe um agendamento para o dia "29" do mês "8" às "14:00" horas no nome de "Carla Alves" com dentista "Felipe" no sistema
+        When Eu solicito ao sistema a criação do agendamento "56247856596" para o dia "29" do mês "8" às "14:00" horas no nome de "Karla" com dentista "Felipe" no sistema
         Then O sistema retorna que o agendamento é inválido por conflito de horários
-        And O agendamento no nome de 'Karla' não é armazenado
+        And O agendamento no nome de "Karla" não é armazenado
