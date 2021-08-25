@@ -6,7 +6,7 @@ Feature: Mostrar atendimentos filtrados para o dentista
 ############################## GUI Scenarios  ##############################
 
 Scenario: O dentista precisa filtrar todos os atendimentos por um range de datas.
-	Given Eu estou na página de "Atendimentos"
+	Given Estou na página de "Atendimentos"
 	And Os atendimentos "João Asfora Rodrigues, 123456789-01, consulta, 09-04-2020, 10:59, Igor Henrique" e "João Asfora Rodrigues, 123456789-01, cirurgia, 15-04-2020, 10:59, Galindo Vinícius" e "João Asfora Silva, 987654321-98, consulta, 09-03-2020, 10:59, Karlos Gubianni" são exibidos na tela.
 	When Eu escolho filtrar pela data inicial "01-04-2020"
 	And Eu escolho filtrar pela data final "30-04-2020"

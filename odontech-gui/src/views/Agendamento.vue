@@ -32,7 +32,7 @@
               style='height: 60vh;')
         v-row
           v-col(cols='12')
-            v-row
+            v-row#dentists
               template(v-for='(dentist, index) in dentists')
                 v-col.pr-0.pt-2(cols='auto' align-self='center')
                   v-avatar(size='15' :color='colors[index]' align-self='center')
@@ -52,12 +52,13 @@
               v-col(cols='12')
                 v-autocomplete#dentist_field(v-model='dialogData.dentist' :items="dentists" label='Dentista responsável*' required)
               v-col(cols='12')
-                v-menu(v-model='menu' :close-on-content-click='false' :nudge-right='40' transition='scale-transition' origin="bottom left" top offset-y min-width='auto')
-                  template(v-slot:activator='{ on, attrs }')
-                    v-text-field(v-model='computedDateFormatted' label='Data*' prepend-icon='mdi-calendar' readonly v-bind='attrs' v-on='on')
-                  v-date-picker(
-                    v-model='dialogData.date'
-                    locale='pt-BR')
+                //- v-menu(v-model='menu' :close-on-content-click='false' :nudge-right='40' transition='scale-transition' origin="bottom left" top offset-y min-width='auto')
+                  //- template(v-slot:activator='{ on, attrs }')
+                v-text-field#date_field(v-model='dialogData.date' label='Data*' prepend-icon='mdi-calendar')
+                  //- v-date-picker#date_picker(
+                  //-   v-model='dialogData.date'
+                  //-   locale='pt-BR')
+                //- v-btn#date_button.primary(@click='menu = true') Abrir calendário
               v-col(cols='12')
                 v-select#time_field(v-model='dialogData.time' :items='schedules' label='Horário*' required)
           small *indica os campos obrigatórios
@@ -316,7 +317,7 @@ export default {
       console.log(event.event)
       let result = ''
       result = await axios.get('http://localhost:3000/howMuchTime', {params: {
-        start: event.event.start
+        cpf: event.event.cpf
       }})
       console.log(result.data)
 
