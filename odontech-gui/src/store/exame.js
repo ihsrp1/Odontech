@@ -26,7 +26,12 @@ export const exame = {
     },
     async filterByPatient({ commit }, patient) {
       let result = []
-      result = await axios.get('http://localhost:3000/filterAtendimentoByPatient', {params: {patient}})
+      result = await axios.get('http://localhost:3000/filterExameByPatient', {params: {patient}})
+      commit('setList', result.data)
+    },
+    async filterByType({ commit }, type) {
+      let result = []
+      result = await axios.get('http://localhost:3000/filterExameByType', {params: {type}})
       commit('setList', result.data)
     },
   },
