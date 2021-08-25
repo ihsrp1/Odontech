@@ -100,6 +100,64 @@ var examples = {
           "timed": true
         }
     ],
+    EXAME_LIST:[
+      {
+        "cod": "01",
+        "name": "Pedro Manoel",
+        "date": "16-07-2020",
+        "dentist": "Marcos",
+        "Exame":"IRN",
+        "Result":"3.0"
+      },
+      {
+        "cod": "02",
+        "name": "Pedro Manoel",
+        "date": "16-07-2020",
+        "dentist": "Marcos",
+        "Exame":"TGO",
+        "Result":"5.36"
+      },
+      {
+        "cod": "03",
+        "name": "Felipe Vasconcelos",
+        "date": "23-04-2020",
+        "dentist": "Marcos",
+        "Exame":"IRN",
+        "Result":"2.5"
+      },
+      {
+        "cod": "04",
+        "name": "João Pericles",
+        "date": "20-06-2020",
+        "dentist": "Antonio",
+        "Exame":"FA",
+        "Result":"1.24"
+      },
+      {
+        "cod": "05",
+        "name": "Sonia Maria",
+        "date": "02-08-2020",
+        "dentist": "Antonio",
+        "Exame":"TGO",
+        "Result":"3.24"
+      },
+      {
+        "cod": "06",
+        "name": "Pamela Miranda",
+        "date": "24-07-2020",
+        "dentist": "Fernado",
+        "Exame":"CTX",
+        "Result":"4.23"
+      },
+      {
+        "cod": "07",
+        "name": "Pamela Miranda",
+        "date": "24-07-2020",
+        "dentist": "Fernado",
+        "Exame":"FA",
+        "Result":"1.34"
+      }
+    ],
     PRONTUARIO_LIST: [
         {
             id: '1',

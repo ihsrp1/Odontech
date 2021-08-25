@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 
 import Agendamento from '../views/Agendamento'
 import Atendimento from '../views/Atendimento'
+import Exame from '../views/Exame'
 import Login from '../views/Login'
 
 Vue.use(VueRouter)
@@ -23,6 +24,14 @@ const routes = [
     component: Atendimento,
     meta: {
       title: 'Atendimentos'
+    }
+  },
+  {
+    path: '/exame',
+    name: 'Exame',
+    component: Exame,
+    meta: {
+      title: 'Exame'
     }
   },
   {

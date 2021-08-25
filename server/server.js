@@ -1,5 +1,6 @@
 const Agendamento = require('./agendamentoService');
 const Atendimento = require('./atendimentoService');
+const { initExame } = require('./exameService');
 
 const express = require('express');
 const app = express();
@@ -30,6 +31,7 @@ app.use(function(req, res, next) {
     atendimentos.filterByDoctor(app)
     atendimentos.filterByPatient(app)
     atendimentos.filterByType(app)
+    initExame(app)
 })();
 
 

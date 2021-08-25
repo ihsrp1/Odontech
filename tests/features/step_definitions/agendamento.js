@@ -14,7 +14,7 @@ Given('Estou na página de {string}', async function (string) {
     browser = await puppeteer.launch();
     page = await browser.newPage();
     await page.goto(vue_base_url + string);
-    expect(page.title()).to.eventually.equal(string);
+    expect(page.title()).to.eventually.equal(string.charAt(0).toUpperCase() + string.slice(1));
 });
 
 Given('Eu não vejo o agendamento de nome {string} na lista', async function (string) {
@@ -243,7 +243,7 @@ Then('Eu vejo o agendamento com nome {string}, dentista {string} e data para {st
         for (const item  in Object.values(obj)) {
             classListArr.push(Object.values(obj)[parseInt(item)])
         }
-        page.on('console', consoleObj => console.log(consoleObj.text()));
+        // page.on('console', consoleObj => console.log(consoleObj.text()));
         if (!classListArr.includes('v-outside')) {
             validationAux = await page.evaluate((x, nome, color, day, j) => {
                 let aux = false

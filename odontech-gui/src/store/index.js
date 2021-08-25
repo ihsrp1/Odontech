@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import { loginInformation } from './loginInformation'
 import { agendamento } from './agendamento'
 import { atendimento } from './atendimento'
+import { exame } from './exame'
 Vue.use(Vuex)
 
 import VuexPersistence from 'vuex-persist'
@@ -16,6 +17,7 @@ export default new Vuex.Store({
   modules: {
     loginInformation,
     agendamento,
-    atendimento
+    atendimento,
+    exame
   }
 })
