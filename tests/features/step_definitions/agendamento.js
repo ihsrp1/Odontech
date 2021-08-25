@@ -10,7 +10,7 @@ let eventGlobal = null
 
 // Scenario: Criar um agendamento com informações incompletas
 
-Given('Eu estou na página de {string}', async function (string) {
+Given('Estou na página de {string}', async function (string) {
     browser = await puppeteer.launch();
     page = await browser.newPage();
     await page.goto(vue_base_url + string);
@@ -290,7 +290,7 @@ Then('O sistema retorna que o agendamento é inválido por conflito de horários
         date: eventGlobal.date,
         time: eventGlobal.time
     }})
-    console.log(result.data)
+    // console.log(result.data)
     expect(result.data).to.equal(false)
 });
 

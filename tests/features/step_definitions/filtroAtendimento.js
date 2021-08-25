@@ -8,7 +8,7 @@ var vue_base_url = "http://localhost:8080/";
 let [browser, page] = [null, null]
 
 
-Given('Estou na página de {string}', async function (string) {
+Given('Eu estou na página de {string}', async function (string) {
     browser = await puppeteer.launch();
     page = await browser.newPage();
 
@@ -342,7 +342,7 @@ Then('O sistema retorna o código de erro {string}', async function (string) {
     try{
         const req = await axios.get('http://localhost:3000/filterAtendimentoByRange', {params: {from: "30-12-2020", to: "31-12-2020"}})
     } catch(err) {
-        console.log(err.response.status)
+        // console.log(err.response.status)
         expect(err.response.status).to.equal(Number(string))
     }
 });

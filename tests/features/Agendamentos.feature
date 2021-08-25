@@ -7,7 +7,7 @@ Feature: Agendamento de horários do dentista
 #################### GUI SCENARIOS ####################
 
     Scenario: Criar um agendamento com informações incompletas
-        Given Eu estou na página de "agendamentos"
+        Given Estou na página de "agendamentos"
         And Eu não vejo o agendamento de nome "Maria" na lista
         When Eu seleciono a opção para adicionar um agendamento
         And Eu tento cadastrar o agendamento "12345678910" com nome "Maria"
@@ -17,7 +17,7 @@ Feature: Agendamento de horários do dentista
         And Eu não vejo o nome "Maria" na lista de agendamentos
 
     Scenario: Criar um novo agendamento
-        Given Eu estou na página de "agendamentos"
+        Given Estou na página de "agendamentos"
         And Eu não vejo o agendamento de nome "Maria" na lista
         When Eu seleciono a opção para adicionar um agendamento
         And Eu tento cadastrar o agendamento "12345678910" com nome "Maria"
@@ -27,7 +27,7 @@ Feature: Agendamento de horários do dentista
         And Eu vejo o agendamento com nome "Maria", dentista "Felipe" e data para "27" do mês "8" às "10" horas na lista de agendamentos
 
     Scenario: Criar um agendamento com horário já indisponível
-        Given Eu estou na página de "agendamentos"
+        Given Estou na página de "agendamentos"
         And Eu não vejo o agendamento de nome "Karla" na lista
         And Eu vejo o agendamento com nome "Maria", dentista "Felipe" e data para "27" do mês "8" às "10" horas na lista de agendamentos
         When Eu seleciono a opção para adicionar um agendamento
