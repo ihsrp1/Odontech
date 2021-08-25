@@ -35,7 +35,12 @@ class Agendamento {
     
     howMuchTime (app) {
         app.get('/howMuchTime', (req, res) => {
-            let start = req.query.start
+            let cpf = req.query.cpf
+            const agendamentos = this.getAgendamentosList()
+            const event = agendamentos.find(agendamento => {
+                return agendamento.cpf === cpf
+            })
+            let start = event.start
             const date_future = new Date(start)
             const date_now = new Date()
             let seconds = Math.floor((date_future - (date_now))/1000)

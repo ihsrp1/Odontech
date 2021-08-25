@@ -317,7 +317,7 @@ export default {
       console.log(event.event)
       let result = ''
       result = await axios.get('http://localhost:3000/howMuchTime', {params: {
-        start: event.event.start
+        cpf: event.event.cpf
       }})
       console.log(result.data)
 
