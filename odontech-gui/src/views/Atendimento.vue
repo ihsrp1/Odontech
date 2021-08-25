@@ -8,17 +8,17 @@
             .text-subtitle- Procurar por:
         v-row
           v-col(cols='5' align-self='center')
-            v-text-field(v-model='search.patient_name' label='Nome do Paciente' hide-details outlined rounded dense)
+            v-text-field.atendimento-input-patient(v-model='search.patient_name' label='Nome do Paciente' hide-details outlined rounded dense)
           v-col(cols='5' align-self='center')
-            v-text-field(v-model='search.doctor_name' label='Nome do Dentista' hide-details outlined rounded dense)
+            v-text-field.atendimento-input-dentist(v-model='search.doctor_name' label='Nome do Dentista' hide-details outlined rounded dense)
           v-col(cols='auto' align-self='center')
-            v-text-field(v-model='search.inicial' label='Data Inicial' hide-details outlined rounded dense)
+            v-text-field.atendimento-input-date-initial(v-model='search.inicial' label='Data Inicial' hide-details outlined rounded dense)
           v-col(cols='auto' align-self='center')
-            v-text-field(v-model='search.final' label='Data Final' hide-details outlined rounded dense)
+            v-text-field.atendimento-input-date-final(v-model='search.final' label='Data Final' hide-details outlined rounded dense)
           v-col(cols='auto' align-self='center')
-            v-text-field(v-model='search.tipo' label='Tipo do Atendimento' hide-details outlined rounded dense)
+            v-text-field.atendimento-input-type(v-model='search.tipo' label='Tipo do Atendimento' hide-details outlined rounded dense)
           v-col(cols='1' align-self='center')
-            v-btn(icon @click='filterAtendimento')
+            v-btn.atendimento-btn-filter(icon @click='filterAtendimento')
               v-icon mdi-filter-variant
         v-row
           v-virtual-scroll(
@@ -31,10 +31,10 @@
                 v-list-item-avatar(color='grey lighten-2')
                   v-icon mdi-account
                 v-list-item-content
-                  v-list-item-title Data: {{ item.data }}
-                  v-list-item-title Dentista Responsável: {{ item.medico_responsavel }}
-                  v-list-item-title Paciente: {{ item.nome_paciente }}
-                  v-list-item-subtitle Tipo: {{ item.tipo }} 
+                  v-list-item-title.atendimento-date Data: {{ item.data }}
+                  v-list-item-title.atendimento-dentist Dentista Responsável: {{ item.medico_responsavel }}
+                  v-list-item-title.atendimento-patient Paciente: {{ item.nome_paciente }}
+                  v-list-item-subtitle.atendimento-type Tipo: {{ item.tipo }} 
               v-divider(:key='index')
 </template>
 
