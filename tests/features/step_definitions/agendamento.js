@@ -208,6 +208,7 @@ Then('Eu posso ver uma mensagem de agendamento inválido', async function () {
     let validation = false
     await page.click('#confirm_creation')
 
+    await page.waitForSelector('h2[id^=swal]')
     const confirmCreation = await page.$('h2[id^=swal]')
     const texto = await (await confirmCreation.getProperty('innerText')).jsonValue()
     if (texto === 'O dentista não está disponível nesse horário.' || texto === 'Por favor insira todas as informações para o agendamento.') {
