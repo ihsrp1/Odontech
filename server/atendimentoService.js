@@ -78,7 +78,7 @@ class Atendimento {
     filterByDoctor (app) {
         app.get('/filterAtendimentoByDoctor', (req, res) => {
             let doctor = req.query.doctor
-            let atendimentos = getAtendimentosList(app)
+            let atendimentos = this.getAtendimentosList(app)
             let filtered = atendimentos.filter((atendimento) => {
                 return atendimento.medico_responsavel.includes(doctor)
             })
@@ -95,7 +95,7 @@ class Atendimento {
             console.log(req.query)
             console.log(req.params)
             let type = req.query.type
-            let atendimentos = getAtendimentosList(app)
+            let atendimentos = this.getAtendimentosList(app)
             let filtered = atendimentos.filter((atendimento) => {
                 return atendimento.tipo.includes(type)
             })
