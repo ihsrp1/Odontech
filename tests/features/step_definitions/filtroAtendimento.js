@@ -8,7 +8,7 @@ var vue_base_url = "http://localhost:8080/";
 let [browser, page] = [null, null]
 
 
-Given('Eu estou na página de {string}', async function (string) {
+Given('Estou na página de {string}', async function (string) {
     browser = await puppeteer.launch();
     page = await browser.newPage();
 
