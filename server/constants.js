@@ -153,7 +153,7 @@ var examples = {
             },
             atendimento: [
                 {
-                    medico_responsavel: 'Karlos Gubiani',
+                    medico_responsavel: 'Karlos Gubianni',
                     nome_paciente: 'João Asfora Silva',
                     queixas: 'Dente quebrado',
                     procedimento_realizado: 'Reconstrução da coroa',
