@@ -43,7 +43,7 @@ export default {
         if(this.search.patient_name)
           await this.$store.dispatch('exame/filterByPatient', this.search.patient_name)
         else if(this.search.exame)
-          await this.$store.dispatch('exame/filterByDoctor', this.search.exame)
+          await this.$store.dispatch('exame/filterByType', this.search.exame)
         // if(this.search.tipo)
         // this.atendimentos = this.$store.getters['prontuario/getProntuarios']
       } catch (err) {

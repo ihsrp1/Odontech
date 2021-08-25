@@ -26,37 +26,35 @@ function getExameList () {
 
 
 function filterByPatient (app) {
-    app.get('/filterAtendimentoByPatient', (req, res) => {
+    app.get('/filterExameByPatient', (req, res) => {
         let patient = req.query.patient
         let exames =  examples.EXAME_LIST
-        let filteredPront = exames.filter((exame) => {
-            return removeWhiteSpaces(removeAcento(exame.paciente.nome)).includes(removeWhiteSpaces(removeAcento(patient)))
+        console.log(exames)
+        exames = exames.filter((exame) => {
+            console.log(exame.name, patient)
+            return removeWhiteSpaces(removeAcento(exame.name)).includes(removeWhiteSpaces(removeAcento(patient)))
         })
-        let selectedAtendimentos = filteredPront.reduce((acc, exame) => {
-            return acc.concat(exame.atendimento)
-        },[])
-        if(selectedAtendimentos.length)
-            res.send(selectedAtendimentos)
-        else
-        res.status(404).send('Nenhum atendimento encontrado')
+        if(exames.length)
+            res.send(exames)
+        res.status(404).send('Nenhum exame encontrado')
     })
 }
 
 
 
 function filterByType (app) {
-    app.get('/filterAtendimentoByType', (req, res) => {
+    app.get('/filterExameByType', (req, res) => {
         console.log(req.query)
         console.log(req.params)
         let type = req.query.type
-        let atendimentos = getAtendimentosList(app)
-        let filtered = atendimentos.filter((atendimento) => {
-            return atendimento.tipo.includes(type)
+        let exames = examples.EXAME_LIST
+        let filtered = exames.filter((exame) => {
+            return exame.Exame === type
         })
         if(filtered.length)
             res.send(filtered)
         else
-        res.status(404).send('Nenhum atendimento encontrado')
+        res.status(404).send('Nenhum exame encontrado')
     })
 }
 
