@@ -32,13 +32,10 @@ Scenario: O dentista precisa filtrar todos os atendimentos por um range de datas
 
 Scenario: Filtro de atendimentos por tipo.
 	Given Os atendimentos "João Asfora Rodrigues, 123456789-01, consulta, 09-04-2020, 10:59, Igor Henrique" e "João Asfora Rodrigues, 123456789-01, cirurgia, 15-04-2020, 10:59, Galindo Vinícius" e "João Asfora Silva, 987654321-98, consulta, 09-03-2020, 10:59, Karlos Gubianni" estão armazenadas no sistema.
-	When o usuário solicita o filtro de atendimentos por tipo "cirurgia"
-	And Eu requisito o sistema para "filtrar"
-	Then o sistema retorna um atendimento incluindo informações com nome do paciente, CPF do paciente, tipo, data, hora, nome do dentista com os valores "João Asfora Rodrigues, 123456789-01, cirurgia, 15-04-2020, 10:59, Galindo Vinícius"
+	When Eu filtro pelo tipo "cirurgia"
+	Then O sistema retorna um atendimento incluindo informações com nome do paciente, CPF do paciente, tipo, data, hora, nome do dentista com os valores "João Asfora Rodrigues, 123456789-01, cirurgia, 15-04-2020, 10:59, Galindo Vinícius"
 
 Scenario: Filtro de atendimentos por um range de datas, porém não existe nenhum atendimento registrado nesse período. O sistema retorna um código de erro.
 	Given Os atendimentos "João Asfora Rodrigues, 123456789-01, consulta, 09-04-2020, 10:59, Igor Henrique" e "João Asfora Rodrigues, 123456789-01, cirurgia, 15-04-2020, 10:59, Galindo Vinícius" e "João Asfora Silva, 987654321-98, consulta, 09-03-2020, 10:59, Karlos Gubianni" estão armazenadas no sistema.
-	When Eu escolho filtrar pela data inicial "30-12-2020"
-	And Eu escolho filtrar pela data final "31-12-2020"
-	And Eu requisito o sistema para "filtrar"
-	Then o sistema retorna o código de erro "404"
+	When Eu filtro pelo range de datas "30-12-2020", "31-12-2020"
+	Then O sistema retorna o código de erro "404"

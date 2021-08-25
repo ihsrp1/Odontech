@@ -1,5 +1,6 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
 const puppeteer = require('puppeteer');
+const axios = require('axios')
 let chai = require('chai').use(require('chai-as-promised'));
 let expect = chai.expect;
 
@@ -107,7 +108,7 @@ When('Eu clico para {string}', async function (string) {
     // Write code here that turns the phrase above into concrete actions
     await page.waitForSelector('.row > .col > .atendimento-btn-filter > .v-btn__content > .v-icon')
     await page.click('.row > .col > .atendimento-btn-filter')
-    expect(1).to.equal(1)
+    return
 });
 
 When('Eu escolho filtrar pelo tipo {string}', async function (string) {
@@ -244,4 +245,104 @@ Then('Eu vejo uma mensagem de erro com {string}', async function (string) {
     const error_el = await page.$('h2[id^=swal]')
     const msg = await (await error_el.getProperty('innerText')).jsonValue()
     expect(msg).to.equal(string)
+});
+
+Given('Os atendimentos {string} e {string} e {string} estão armazenadas no sistema.', async function (string, string2, string3) {   
+    // Write code here that turns the phrase above into concrete actions
+    const [patient1, cod1, type1, date1, time1, dentist1] = string.split(', ')
+    const [patient2, cod2, type2, date2, time2, dentist2] = string2.split(', ')
+    const [patient3, cod3, type3, date3, time3, dentist3] = string3.split(', ')
+
+    const req = await axios.get('http://localhost:3000/listAtendimentos')
+    const data = req.data.map(d => ({
+        medico_responsavel: d.medico_responsavel,
+        nome_paciente: d.nome_paciente,
+        data: d.data,
+        tipo: d.tipo,
+    }))
+
+    const toCheck = [
+        {
+            medico_responsavel: dentist1,
+            nome_paciente: patient1,
+            data: `${date1}, ${time1}`,
+            tipo: type1
+        },
+        {
+            medico_responsavel: dentist2,
+            nome_paciente: patient2,
+            data: `${date2}, ${time2}`,
+            tipo: type2
+        },{
+            medico_responsavel: dentist3,
+            nome_paciente: patient3,
+            data: `${date3}, ${time3}`,
+            tipo: type3
+        }
+    ]
+    
+    let check = 0;
+    for(let d of data) {
+        let ok = true
+        for(let k in d) {
+            if(data[k] != toCheck[k]){
+                ok = false
+            }
+        }
+        if(ok) check++
+    }
+
+    expect(check).to.equal(3)
+});
+
+When('Eu filtro pelo tipo {string}', async function (string) {
+    // Write code here that turns the phrase above into concrete actions
+    const req = await axios.get('http://localhost:3000/filterAtendimentoByType', {params: {type: string}})
+
+    expect(req.status).to.equal(200)
+});
+
+When('Eu filtro pelo range de datas {string}, {string}', async function (string, string2) {
+    // Write code here that turns the phrase above into concrete actions
+    return
+});
+
+Then('O sistema retorna um atendimento incluindo informações com nome do paciente, CPF do paciente, tipo, data, hora, nome do dentista com os valores {string}', async function (string) {
+    // Write code here that turns the phrase above into concrete actions
+    const [patient1, cod1, type1, date1, time1, dentist1] = string.split(', ')
+
+    const toCheck = {
+        medico_responsavel: dentist1,
+        nome_paciente: patient1,
+        data: `${date1}, ${time1}`,
+        tipo: type1
+    }
+
+    const req = await axios.get('http://localhost:3000/filterAtendimentoByType', {params: {type: type1}})
+
+    const data = req.data.map(d => ({
+        medico_responsavel: d.medico_responsavel,
+        nome_paciente: d.nome_paciente,
+        data: d.data,
+        tipo: d.tipo,
+    }))[0]
+
+    let ok = true
+    for(let k in data) {
+        if(data[k] != toCheck[k]){
+            ok = false
+        }
+    }
+
+    expect(ok).to.be.true
+});
+
+Then('O sistema retorna o código de erro {string}', async function (string) {
+    // Write code here that turns the phrase above into concrete actions
+    try{
+        const req = await axios.get('http://localhost:3000/filterAtendimentoByRange', {params: {from: "30-12-2020", to: "31-12-2020"}})
+    } catch(err) {
+        console.log(err.response.status)
+        expect(err.response.status).to.equal(Number(string))
+    }
 });
