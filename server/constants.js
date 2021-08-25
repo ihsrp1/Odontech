@@ -126,7 +126,7 @@ var examples = {
                     prontID: "1"
                 },
                 {
-                    medico_responsavel: 'Igor Henrique',
+                    medico_responsavel: 'Galindo Vinícius',
                     nome_paciente: 'João Asfora Rodrigues',
                     queixas: 'Dor profunda ao mastigar',
                     procedimento_realizado: 'Remoção dos dentes sisos',
