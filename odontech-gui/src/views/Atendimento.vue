@@ -31,10 +31,10 @@
                 v-list-item-avatar(color='grey lighten-2')
                   v-icon mdi-account
                 v-list-item-content
-                  v-list-item-title Data: {{ item.data }}
-                  v-list-item-title Dentista Responsável: {{ item.medico_responsavel }}
-                  v-list-item-title Paciente: {{ item.nome_paciente }}
-                  v-list-item-subtitle Tipo: {{ item.tipo }} 
+                  v-list-item-title.atendimento-date Data: {{ item.data }}
+                  v-list-item-title.atendimento-dentist Dentista Responsável: {{ item.medico_responsavel }}
+                  v-list-item-title.atendimento-patient Paciente: {{ item.nome_paciente }}
+                  v-list-item-subtitle.atendimento-type Tipo: {{ item.tipo }} 
               v-divider(:key='index')
 </template>
 
